@@ -11,14 +11,14 @@ const List = () => {
     const [favorites, setFavorites] = useState([]);
 
     const getMovieRequest = async (query) => {
-        const url = `https://api.themoviedb.org/3/movie/550?api_key=5567a607e97634a52b7ffdc87eae7dc3`;
+        const url = `http://api.themoviedb.org/3/movie/popular?api_key=${process.env.REACT_APP_PUBLIC_API_KEY}`;
 
         const response = await fetch(url);
         const responseJson = await response.json();
         console.log("line 18",response,responseJson);
-        if (responseJson.Search) {
-            setMovies(responseJson.Search);
-        }
+        if (responseJson.results) {
+            setMovies(responseJson.results);
+          }
     };
 
     const addFavouriteMovie = (movie) => {
@@ -31,7 +31,7 @@ const List = () => {
     }, [searchValue]);
 
     const navigateDetail = (data) => {
-        navigate(`/detail/${data?.imdbID}`, { state: data });
+        navigate(`/detail/${data?.iD}`, { state: data });
     };
 
     return (
@@ -43,12 +43,12 @@ const List = () => {
                         <>
                             <div className='col-sm-4 col-lg-2 py-2' key={index} >
                                 <div class="card image-container" onClick={() => navigateDetail(movie)}>
-                                    <img src={movie.Poster} alt='movie' className='card-img-top w-100 h-100' />
+                                    <img src={process.env.REACT_APP_PUBLIC_IMG_ENDPOINT + movie.poster_path} alt='movie' className='card-img-top w-100 h-100' />
                                     <div className='card-img-overlay overlay'>
                                         <div className="card-text overlay-text" onClick={() => { addFavouriteMovie(movie) }}>Add to Favorites</div>
                                     </div>
                                     <div class="card-body">
-                                        <h6 class="card-title">{movie.Title}</h6>
+                                        <h6 class="card-title">{movie.title}</h6>
                                     </div>
                                 </div>
                             </div>
