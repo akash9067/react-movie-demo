@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Header from '../Common/Header/Header';
+import { Header, Loader } from '../../Common/Component';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 const Detail = () => {
@@ -86,6 +86,7 @@ const Detail = () => {
 
   return (
     <div>
+      <Loader />
       <Header />
       <div className='container-fluid'>
         <div className='row'>

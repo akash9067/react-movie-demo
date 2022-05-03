@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Header from '../Common/Header/Header';
+import { Header } from '../../Common/Component';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 const Favorites = () => {

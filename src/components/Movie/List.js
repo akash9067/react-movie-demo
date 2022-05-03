@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Header from '../Common/Header/Header';
+import { Header, Loader } from '../../Common/Component';
 import { useNavigate } from 'react-router-dom';
 import './Common.css'
 
@@ -15,10 +15,10 @@ const List = () => {
 
         const response = await fetch(url);
         const responseJson = await response.json();
-        console.log("line 18",response,responseJson);
+
         if (responseJson.results) {
             setMovies(responseJson.results);
-          }
+        }
     };
 
     const addFavouriteMovie = (movie) => {
@@ -36,6 +36,7 @@ const List = () => {
 
     return (
         <div>
+            <Loader isLoading={true}/>
             <Header searchValue={searchValue} setSearchValue={setSearchValue} data={favorites} />
             <div className='container-fluid'>
                 <div className='row'>
