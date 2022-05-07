@@ -1,7 +1,8 @@
-import MovieList from './components/Movie/List';
-import { Routes, Route } from "react-router-dom";
-import MovieDetail from './components/Movie/Detail';
-import Favorites from './components/Movie/Favorites';
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+import MovieDetail from "./components/Movie/Detail";
+import Favorites from "./components/Movie/Favorites";
+import MovieList from "./components/Movie/List";
 
 function App() {
   return (

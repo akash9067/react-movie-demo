@@ -1,1 +1,1 @@
-export { default as IC_ARROW } from './arrow.svg';
+export { default as IC_ARROW } from "./arrow.svg";

@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Header, Loader } from '../../Common/Component';
-import { useLocation, useNavigate } from 'react-router-dom';
+import "bootstrap/dist/css/bootstrap.min.css";
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Header, Loader } from "../../Common/Component";
 
 const Detail = () => {
   const location = new useLocation();
@@ -88,27 +88,55 @@ const Detail = () => {
     <div>
       <Loader />
       <Header />
-      <div className='container-fluid'>
-        <div className='row'>
-          <div className='col-sm-2 col-md-4'>
-            <img src={movieDetail?.Poster} alt='movie' className='img-fluid w-100 h-100 py-2' />
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-sm-2 col-md-4">
+            <img
+              src={movieDetail?.Poster}
+              alt="movie"
+              className="img-fluid w-100 h-100 py-2"
+            />
           </div>
-          <div className='col py-2'>
+          <div className="col py-2">
             <h3>{movieDetail?.Title}</h3>
             <h6>Genre : {movieDetail?.Genre}</h6>
             <br />
-            <div className='col-6'><div><strong>Actors :</strong></div>{movieDetail?.Actors}</div>
-            <p><div><strong>Story :</strong></div>{movieDetail?.Plot}</p>
+            <div className="col-6">
+              <div>
+                <strong>Actors :</strong>
+              </div>
+              {movieDetail?.Actors}
+            </div>
+            <p>
+              <div>
+                <strong>Story :</strong>
+              </div>
+              {movieDetail?.Plot}
+            </p>
           </div>
         </div>
-        <div className='row'>
+        <div className="row">
           {movies.map((movie, index) => (
             <>
-              <div className='col-sm-4 col-lg-2 py-2' key={index} >
-                <div class="card image-container" onClick={() => navigateDetail(movie)}>
-                  <img src={movie.Poster} alt='movie' className='card-img-top w-100 h-100' />
-                  <div className='card-img-overlay overlay'>
-                    <div className="card-text overlay-text" onClick={() => { addFavouriteMovie(movie) }}>Add to Favorites</div>
+              <div className="col-sm-4 col-lg-2 py-2" key={index}>
+                <div
+                  class="card image-container"
+                  onClick={() => navigateDetail(movie)}
+                >
+                  <img
+                    src={movie.Poster}
+                    alt="movie"
+                    className="card-img-top w-100 h-100"
+                  />
+                  <div className="card-img-overlay overlay">
+                    <div
+                      className="card-text overlay-text"
+                      onClick={() => {
+                        addFavouriteMovie(movie);
+                      }}
+                    >
+                      Add to Favorites
+                    </div>
                   </div>
                   <div class="card-body">
                     <h6 class="card-title">{movie.Title}</h6>
@@ -120,7 +148,7 @@ const Detail = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Detail;

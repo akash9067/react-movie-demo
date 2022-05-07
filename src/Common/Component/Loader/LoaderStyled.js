@@ -1,7 +1,7 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const LoaderStyled = styled.div`
-.loader {
+  .loader {
     position: absolute;
     top: 50%;
     left: 40%;
