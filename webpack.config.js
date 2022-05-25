@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 module.exports = {
   entry: path.join(__dirname, "src", "index.js"),
   output: {
-    path: path.resolve(__dirname, "dist"),
+    path: path.resolve(__dirname, "build"),
   },
   module: {
     rules: [
@@ -32,6 +32,10 @@ module.exports = {
         use: ["@svgr/webpack"],
       },
     ],
+  },
+  performance: {
+    maxAssetSize: 1000000,
+    maxEntrypointSize: 512000,
   },
   plugins: [
     new HtmlWebpackPlugin({
