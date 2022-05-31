@@ -23,7 +23,7 @@ module.exports = {
         use: ["style-loader", "css-loader"],
       },
       {
-        test: /\.(png|svg|jpg|jpeg|gif|ico)$/,
+        test: /\.(png|svg|jpg|jpeg|gif|ico|json)$/,
         exclude: /node_modules/,
         use: ["file-loader?name=[name].[ext]"], // ?name=[name].[ext] is only necessary to preserve the original file name
       },
@@ -42,7 +42,7 @@ module.exports = {
       template: "./public/index.html",
       filename: "./index.html",
       favicon: "./public/favicon.ico",
-      manifest: "./public/manifest.json",
+      filename: "./manifest.json",
     }),
   ],
 };
