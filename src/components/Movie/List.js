@@ -10,14 +10,14 @@ const List = () => {
   const [searchValue, setSearchValue] = useState("Marvel");
   const [favorites, setFavorites] = useState([]);
 
-  const getMovieRequest = async (query) => {
+  const getMovieRequest = async () => {
     const url = `http://api.themoviedb.org/3/movie/popular?api_key=5567a607e97634a52b7ffdc87eae7dc3`;
 
     const response = await fetch(url);
     const responseJson = await response.json();
 
-    if (responseJson.results) {
-      setMovies(responseJson.results);
+    if (responseJson?.results) {
+      setMovies(responseJson?.results);
     }
   };
 
@@ -36,7 +36,7 @@ const List = () => {
 
   return (
     <div>
-      <Loader isLoading={true} />
+      {/* <Loader isLoading={true} /> */}
       <Header
         searchValue={searchValue}
         setSearchValue={setSearchValue}
@@ -48,13 +48,13 @@ const List = () => {
             <>
               <div className="col-sm-4 col-lg-2 py-2" key={index}>
                 <div
-                  class="card image-container"
+                  className="card image-container"
                   onClick={() => navigateDetail(movie)}
                 >
                   <img
                     src={
                       'https://image.tmdb.org/t/p/w500' +
-                      movie.poster_path
+                      movie?.poster_path
                     }
                     alt="movie"
                     className="card-img-top w-100 h-100"
@@ -69,8 +69,8 @@ const List = () => {
                       Add to Favorites
                     </div>
                   </div>
-                  <div class="card-body">
-                    <h6 class="card-title">{movie.title}</h6>
+                  <div className="card-body">
+                    <h6 className="card-title">{movie?.title}</h6>
                   </div>
                 </div>
               </div>

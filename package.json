@@ -4,6 +4,7 @@
   "private": true,
   "homepage": " https://akash9067.github.io/react-movie-demo/",
   "dependencies": {
+    "@babel/runtime": "^7.18.3",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.1.1",
     "@testing-library/user-event": "^13.5.0",
@@ -51,6 +52,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.17.10",
+    "@babel/plugin-transform-runtime": "^7.18.2",
     "@babel/preset-env": "^7.17.10",
     "@babel/preset-react": "^7.16.7",
     "@svgr/webpack": "^6.2.1",

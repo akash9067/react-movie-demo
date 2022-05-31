@@ -120,11 +120,11 @@ const Detail = () => {
             <>
               <div className="col-sm-4 col-lg-2 py-2" key={index}>
                 <div
-                  class="card image-container"
+                  className="card image-container"
                   onClick={() => navigateDetail(movie)}
                 >
                   <img
-                    src={movie.Poster}
+                    src={movie?.Poster}
                     alt="movie"
                     className="card-img-top w-100 h-100"
                   />
@@ -138,8 +138,8 @@ const Detail = () => {
                       Add to Favorites
                     </div>
                   </div>
-                  <div class="card-body">
-                    <h6 class="card-title">{movie.Title}</h6>
+                  <div className="card-body">
+                    <h6 className="card-title">{movie?.Title}</h6>
                   </div>
                 </div>
               </div>
