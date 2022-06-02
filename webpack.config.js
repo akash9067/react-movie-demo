@@ -1,5 +1,6 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   entry: path.join(__dirname, "src", "index.js"),
@@ -38,11 +39,17 @@ module.exports = {
     maxEntrypointSize: 512000,
   },
   plugins: [
+    new CopyPlugin({
+      patterns: [
+        { from: "./public/manifest.json", to: "manifest.json" },
+        { from: "./public/logo192.png", to: "logo192.png" },
+        { from: "./public/logo512.png", to: "logo512.png" },
+      ],
+    }),
     new HtmlWebpackPlugin({
       template: "./public/index.html",
       filename: "./index.html",
       favicon: "./public/favicon.ico",
-      filename: "./manifest.json",
     }),
   ],
 };
