@@ -3,27 +3,44 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Header, Loader } from "../../Common/Component";
+import _ from "lodash";
 
 const Detail = () => {
   const location = new useLocation();
   const [movieDetail, setMovieDetail] = useState();
+  const [movieCredit, setMovieCredit] = useState();
   const [movies, setMovies] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const navigate = new useNavigate();
 
   const getMovieDetail = async () => {
-    const url = `http://www.omdbapi.com/?i=${location?.state?.imdbID}&apikey=b5e0c74e&plot=full`;
+    console.log("line - 15", location);
+    const url = `https://api.themoviedb.org/3/movie/${location?.state?.id}?api_key=5567a607e97634a52b7ffdc87eae7dc3&language=en-US`;
 
     const response = await fetch(url);
     const responseJson = await response.json();
 
     if (responseJson) {
+      console.log("line 22", responseJson);
       setMovieDetail(responseJson);
+    }
+  };
+
+  const getMovieCredit = async () => {
+    const url = `https://api.themoviedb.org/3/movie/${location?.state?.id}/credits?api_key=5567a607e97634a52b7ffdc87eae7dc3&language=en-US`;
+
+    const response = await fetch(url);
+    const responseJson = await response.json();
+
+    if (responseJson) {
+      console.log("line 22", responseJson);
+      setMovieCredit(responseJson?.cast);
     }
   };
 
   useEffect(() => {
     getMovieDetail();
+    getMovieCredit();
   }, [location]);
 
   //   {
@@ -76,7 +93,7 @@ const Detail = () => {
 
   useEffect(() => {
     if (movieDetail) {
-      getMovieRequest(movieDetail?.Title);
+      getMovieRequest(movieDetail?.original_title);
     }
   }, [movieDetail]);
 
@@ -92,26 +109,26 @@ const Detail = () => {
         <div className="row">
           <div className="col-sm-2 col-md-4">
             <img
-              src={movieDetail?.Poster}
+              src={"https://image.tmdb.org/t/p/w500" + movieDetail?.poster_path}
               alt="movie"
               className="img-fluid w-100 h-100 py-2"
             />
           </div>
           <div className="col py-2">
-            <h3>{movieDetail?.Title}</h3>
-            <h6>Genre : {movieDetail?.Genre}</h6>
+            <h3>{movieDetail?.original_title}</h3>
+            <h6>Genre : {_.join(_.map(movieDetail?.genres,'name'),', ')}</h6>
             <br />
             <div className="col-6">
               <div>
                 <strong>Actors :</strong>
               </div>
-              {movieDetail?.Actors}
+              {_.join(_.map(movieCredit,'name'),', ')}
             </div>
             <p>
               <div>
                 <strong>Story :</strong>
               </div>
-              {movieDetail?.Plot}
+              {movieDetail?.overview}
             </p>
           </div>
         </div>

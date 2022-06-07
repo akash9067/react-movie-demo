@@ -11,7 +11,7 @@ const List = () => {
   const [favorites, setFavorites] = useState([]);
 
   const getMovieRequest = async () => {
-    const url = `http://api.themoviedb.org/3/movie/popular?api_key=5567a607e97634a52b7ffdc87eae7dc3`;
+    const url = `https://api.themoviedb.org/3/movie/popular?api_key=5567a607e97634a52b7ffdc87eae7dc3`;
 
     const response = await fetch(url);
     const responseJson = await response.json();
@@ -31,7 +31,7 @@ const List = () => {
   }, [searchValue]);
 
   const navigateDetail = (data) => {
-    navigate(`/detail/${data?.iD}`, { state: data });
+    navigate(`/detail/${data?.original_title}`, { state: data });
   };
 
   return (
@@ -70,7 +70,7 @@ const List = () => {
                     </div>
                   </div>
                   <div className="card-body">
-                    <h6 className="card-title">{movie?.title}</h6>
+                    <h6 className="card-title">{movie?.original_title}</h6>
                   </div>
                 </div>
               </div>
