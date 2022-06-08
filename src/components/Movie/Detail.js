@@ -14,14 +14,12 @@ const Detail = () => {
   const navigate = new useNavigate();
 
   const getMovieDetail = async () => {
-    console.log("line - 15", location);
     const url = `https://api.themoviedb.org/3/movie/${location?.state?.id}?api_key=5567a607e97634a52b7ffdc87eae7dc3&language=en-US`;
 
     const response = await fetch(url);
     const responseJson = await response.json();
 
     if (responseJson) {
-      console.log("line 22", responseJson);
       setMovieDetail(responseJson);
     }
   };
@@ -33,7 +31,6 @@ const Detail = () => {
     const responseJson = await response.json();
 
     if (responseJson) {
-      console.log("line 22", responseJson);
       setMovieCredit(responseJson?.cast);
     }
   };
@@ -43,46 +40,14 @@ const Detail = () => {
     getMovieCredit();
   }, [location]);
 
-  //   {
-  //     "Title": "Marvel One-Shot: Agent Carter",
-  //     "Year": "2013",
-  //     "Rated": "Not Rated",
-  //     "Released": "24 Sep 2013",
-  //     "Runtime": "15 min",
-  //     "Genre": "Short, Action, Adventure, Sci-Fi",
-  //     "Director": "Louis D'Esposito",
-  //     "Writer": "Eric Pearson (screenplay), Jack Kirby (characters), Stan Lee (characters)",
-  //     "Actors": "Hayley Atwell, Bradley Whitford, Dominic Cooper, Tim Trobec",
-  //     "Plot": "Frustrated at being marginalized at work, Peggy Carter goes on an unauthorized solo field mission.",
-  //     "Language": "N/A",
-  //     "Country": "USA",
-  //     "Awards": "1 win.",
-  //     "Poster": "https://m.media-amazon.com/images/M/MV5BZDIwZTM4M2QtMWFhYy00N2VmLWFlMjItMzI3NjBjYTc0OTMxXkEyXkFqcGdeQXVyNTE1NjY5Mg@@._V1_SX300.jpg",
-  //     "Ratings": [
-  //         {
-  //             "Source": "Internet Movie Database",
-  //             "Value": "7.6/10"
-  //         }
-  //     ],
-  //     "Metascore": "N/A",
-  //     "imdbRating": "7.6",
-  //     "imdbVotes": "8,222",
-  //     "imdbID": "tt3067038",
-  //     "Type": "movie",
-  //     "DVD": "N/A",
-  //     "BoxOffice": "N/A",
-  //     "Production": "N/A",
-  //     "Website": "N/A",
-  //     "Response": "True"
-  // }
-  const getMovieRequest = async (query) => {
-    const url = `http://www.omdbapi.com/?s=${query}&apikey=b5e0c74e`;
+  const getMovieRequest = async (movie_id) => {
+    const url = `https://api.themoviedb.org/3/movie/${movie_id}/recommendations?api_key=5567a607e97634a52b7ffdc87eae7dc3&language=en-US&page=1`;
 
     const response = await fetch(url);
     const responseJson = await response.json();
 
-    if (responseJson.Search) {
-      setMovies(responseJson.Search);
+    if (responseJson?.results) {
+      setMovies(responseJson?.results);
     }
   };
 
@@ -93,12 +58,12 @@ const Detail = () => {
 
   useEffect(() => {
     if (movieDetail) {
-      getMovieRequest(movieDetail?.original_title);
+      getMovieRequest(movieDetail?.id);
     }
   }, [movieDetail]);
 
   const navigateDetail = (data) => {
-    navigate(`/detail/${data?.imdbID}`, { state: data });
+    navigate(`/detail/${data?.original_title}`, { state: data });
   };
 
   return (
@@ -116,13 +81,13 @@ const Detail = () => {
           </div>
           <div className="col py-2">
             <h3>{movieDetail?.original_title}</h3>
-            <h6>Genre : {_.join(_.map(movieDetail?.genres,'name'),', ')}</h6>
+            <h6>Genre : {_.join(_.map(movieDetail?.genres, "name"), ", ")}</h6>
             <br />
             <div className="col-6">
               <div>
                 <strong>Actors :</strong>
               </div>
-              {_.join(_.map(movieCredit,'name'),', ')}
+              {_.join(_.map(movieCredit, "name"), ", ")}
             </div>
             <p>
               <div>
@@ -141,7 +106,7 @@ const Detail = () => {
                   onClick={() => navigateDetail(movie)}
                 >
                   <img
-                    src={movie?.Poster}
+                    src={"https://image.tmdb.org/t/p/w500" + movie?.poster_path}
                     alt="movie"
                     className="card-img-top w-100 h-100"
                   />
@@ -156,7 +121,7 @@ const Detail = () => {
                     </div>
                   </div>
                   <div className="card-body">
-                    <h6 className="card-title">{movie?.Title}</h6>
+                    <h6 className="card-title">{movie?.original_title}</h6>
                   </div>
                 </div>
               </div>
