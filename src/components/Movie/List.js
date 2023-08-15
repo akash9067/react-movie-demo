@@ -4,15 +4,18 @@ import { Header, Loader } from "../../Common/Component";
 import { useNavigate } from "react-router-dom";
 import "./Common.css";
 
-const List = () => {
+const List = ({ selected }) => {
   const navigate = new useNavigate();
   const [movies, setMovies] = useState([]);
   const [searchValue, setSearchValue] = useState("Marvel");
   const [favorites, setFavorites] = useState([]);
 
   const getMovieRequest = async () => {
-    const url = `https://api.themoviedb.org/3/movie/popular?api_key=5567a607e97634a52b7ffdc87eae7dc3`;
-
+    let url =
+      "https://api.themoviedb.org/3/trending/all/day?api_key=5567a607e97634a52b7ffdc87eae7dc3";
+    if (selected) {
+      url = `https://api.themoviedb.org/3/discover/tv?include_adult=false&include_null_first_air_dates=false&language=en-US&page=1&sort_by=popularity.desc&api_key=5567a607e97634a52b7ffdc87eae7dc3`;
+    }
     const response = await fetch(url);
     const responseJson = await response.json();
 
@@ -52,10 +55,7 @@ const List = () => {
                   onClick={() => navigateDetail(movie)}
                 >
                   <img
-                    src={
-                      'https://image.tmdb.org/t/p/w500' +
-                      movie?.poster_path
-                    }
+                    src={"https://image.tmdb.org/t/p/w500" + movie?.poster_path}
                     alt="movie"
                     className="card-img-top w-100 h-100"
                   />

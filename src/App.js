@@ -11,6 +11,8 @@ function App() {
         <Route path="/" element={<MovieList />} />
         <Route path="/detail/:id" element={<MovieDetail />} />
         <Route path="/favorites" element={<Favorites />} />
+        <Route path="/movies" element={<MovieList />} />
+        <Route path="/sries" element={<MovieList selected='series' />} />
       </Routes>
     </>
   );
