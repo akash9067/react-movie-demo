@@ -1,16 +1,19 @@
-import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Header, Loader } from "../../Common/Component";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Header, Loader } from "../../Common/Component";
 import "./Common.css";
+import CardWithOverlay from "../../Common/Component/Card/card";
 
 const List = ({ selected }) => {
   const navigate = new useNavigate();
   const [movies, setMovies] = useState([]);
   const [searchValue, setSearchValue] = useState("Marvel");
   const [favorites, setFavorites] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const getMovieRequest = async () => {
+    setLoading(true);
     let url =
       "https://api.themoviedb.org/3/trending/all/day?api_key=5567a607e97634a52b7ffdc87eae7dc3";
     if (selected) {
@@ -20,6 +23,7 @@ const List = ({ selected }) => {
     const responseJson = await response.json();
 
     if (responseJson?.results) {
+      setLoading(false);
       setMovies(responseJson?.results);
     }
   };
@@ -31,7 +35,7 @@ const List = ({ selected }) => {
 
   useEffect(() => {
     getMovieRequest(searchValue);
-  }, [searchValue]);
+  }, [searchValue, selected]);
 
   const navigateDetail = (data) => {
     navigate(`/detail/${data?.original_title}`, { state: data });
@@ -39,7 +43,7 @@ const List = ({ selected }) => {
 
   return (
     <div>
-      {/* <Loader isLoading={true} /> */}
+      <Loader isLoading={loading} />
       <Header
         searchValue={searchValue}
         setSearchValue={setSearchValue}
@@ -75,6 +79,10 @@ const List = ({ selected }) => {
                 </div>
               </div>
             </>
+            // <CardWithOverlay
+            //   imageSrc={"https://image.tmdb.org/t/p/w500" + movie?.poster_path}
+            //   title={movie?.original_title}
+            // />
           ))}
         </div>
       </div>

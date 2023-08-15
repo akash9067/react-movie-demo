@@ -44,6 +44,7 @@ module.exports = {
         { from: "./public/manifest.json", to: "manifest.json" },
         { from: "./public/logo192.png", to: "logo192.png" },
         { from: "./public/logo512.png", to: "logo512.png" },
+        { from: "./public/logo.png", to: "logo.png" },
       ],
     }),
     new HtmlWebpackPlugin({
