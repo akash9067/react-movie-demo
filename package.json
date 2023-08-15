@@ -2,7 +2,7 @@
   "name": "react-movie-demo",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://akash9067.github.io/react-movie-demo",
+  "homepage": "https://skyinfo.site",
   "dependencies": {
     "@babel/runtime": "^7.18.3",
     "@redux-devtools/extension": "^3.2.2",
