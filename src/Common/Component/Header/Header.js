@@ -10,7 +10,7 @@ const Header = (props) => {
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <div className="container-fluid">
           <a className="navbar-brand" href="/">
-            <img src="\logo.png" alt="logo" className="logo" />
+            <img src="images/logo.png" alt="logo" className="logo" />
           </a>
           <button
             className="navbar-toggler"
